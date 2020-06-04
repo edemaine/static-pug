@@ -12,19 +12,28 @@ framework like Angular or React, and just need to seed the DOM with basic
 content.  This package is a drop-in replacement for static-html that
 supports `.pug` files instead of `.html` files.
 
-Like static-html, this plugin parses all of the `.pug` files in (the client
-side of) your app, and looks for all top-level `<head>` and `<body>` tags,
-which get appended to the head or body section of your HTML.
-(You can even have multiple `<head>` and/or `<body>` tags; they get
-concatenated.)
-You can also give `<head>` and/or `<body>` tags attributes, though these will
-be applied dynamically via JavaScript.
+Similar to static-html, this plugin parses all of the `.pug` files in
+(the client side of) your app, and looks for all top-level `<head>` and
+`<body>` tags, which get appended to the head or body section of your app's
+HTML (specifically, the initial bundle sent by Meteor.
+You can have multiple `<head>` and/or `<body>` tags; they get concatenated.
+You can also give attributes to the `<head>` and/or `<body>` tags themselves,
+though these will be applied dynamically via JavaScript.
+(I believe this is a limitation of Meteor.)
 
 ## Usage
 
-First add the package to your project:
+First, add the package to your app:
 
-> `meteor add edemaine:static-pug`
+```
+meteor add edemaine:static-pug
+```
+
+Second, add `pug` as a peer NPM dependency in your app:
+
+```
+meteor npm install pug
+```
 
 Then write `.pug` files in your `client` directory (say).  For example:
 
