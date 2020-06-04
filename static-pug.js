@@ -19,12 +19,22 @@ class PugCompiler extends MultiFileCachingCompiler {
     return inputFile.getSourceHash();
   }
 
+  // Treat files with names *.import.pug as imports, not root files that
+  // should get converted.
+  isRoot(inputFile) {
+    return !inputFile.getPathInPackage().endsWith('.import.pug');
+  }
+
   compileOneFile(inputFile) {
     // Convert PUG to HTML and dependency list
+    const inputPackage = inputFile.getPackageName() || '';
+    const inputPath = inputFile.getPathInPackage();
     const template = pug.compile(inputFile.getContentsAsString(), {
-      filename: inputFile.getPathInPackage(),
+      filename: inputPath,
     });
-    const dependencies = template.dependencies;
+    const dependencies = template.dependencies.map((relative) =>
+      Plugin.path.join(`{${inputPackage}}`, relative)
+    );
     const body = template({});
     // Scan HTML for <body> and <head> tags and their attributes
     const result = {
@@ -34,7 +44,7 @@ class PugCompiler extends MultiFileCachingCompiler {
       bodyAttrs: {},
     };
     TemplatingTools.scanHtmlForTags({
-      sourceName: inputFile.getPathInPackage(),
+      sourceName: inputPath,
       contents: body,
       tagNames: ['body', 'head'],
     }).forEach((tag) => {

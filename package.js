@@ -16,7 +16,7 @@ Package.registerBuildPlugin({
   ],
   sources: [
     'static-pug.js',
-  ]
+  ],
 });
 
 Package.onUse(function(api) {

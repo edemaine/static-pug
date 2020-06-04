@@ -45,3 +45,10 @@ body(style="background: purple")
   h1 Welcome to My Meteor App!
   #target
 ```
+
+## Imports
+
+Files ending in `.import.pug` will be treated as imports, and not
+automatically converted to HTML.  You can use Pug's
+[include](https://pugjs.org/language/includes.html) feature to include such
+files within a regular `.pug` file.
