@@ -5,7 +5,11 @@ checkNpmVersions({
   'pug': '3.0.0'
 }, 'static-pug');
 
-pug = require('pug');
+let pug;
+try {
+  pug = require('pug');
+} catch {
+}
 
 class PugCompiler extends MultiFileCachingCompiler {
   constructor() {
@@ -26,6 +30,11 @@ class PugCompiler extends MultiFileCachingCompiler {
   }
 
   compileOneFile(inputFile) {
+    if (!pug) {
+      console.warn(`WARNING: Unable to compile ${inputFile.getPathInPackage()}`+
+        ` without NPM peer dependency: meteor npm install pug`);
+      return;
+    }
     // Convert PUG to HTML and dependency list
     const inputPackage = inputFile.getPackageName() || '';
     const inputPath = inputFile.getPathInPackage();
