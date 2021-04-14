@@ -2,7 +2,7 @@ import { MultiFileCachingCompiler } from 'meteor/caching-compiler';
 import { checkNpmVersions } from 'meteor/tmeasday:check-npm-versions';
 
 checkNpmVersions({
-  'pug': '3.0.0'
+  'pug': '>=3.0.0'
 }, 'static-pug');
 
 let pug;

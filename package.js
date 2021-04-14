@@ -1,7 +1,7 @@
 Package.describe({
   name: 'edemaine:static-pug',
   summary: "Render static .pug files as static HTML in Meteor",
-  version: '0.0.0',
+  version: '0.0.1',
   git: 'https://github.com/edemaine/static-pug.git',
   documentation: 'README.md',
 });
@@ -12,7 +12,7 @@ Package.registerBuildPlugin({
     'caching-compiler@1.2.2',
     'ecmascript@0.14.3',
     'templating-tools@1.1.2',
-    'tmeasday:check-npm-versions@0.3.0',
+    'tmeasday:check-npm-versions@0.3.2',
   ],
   sources: [
     'static-pug.js',
